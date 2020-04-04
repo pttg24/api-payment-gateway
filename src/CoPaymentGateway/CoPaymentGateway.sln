@@ -5,6 +5,14 @@ VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoPaymentGateway", "CoPaymentGateway\CoPaymentGateway.csproj", "{2519C521-BD80-4376-9A96-986B0479A33A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoPaymentGateway.Domain", "CoPaymentGateway.Domain\CoPaymentGateway.Domain.csproj", "{B6D27E87-4909-43D2-B489-C08ABAA5A203}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoPaymentGateway.CQRS.Commands", "CoPaymentGateway.CQRS.Commands\CoPaymentGateway.CQRS.Commands.csproj", "{5E6B1A4A-975D-409B-BD26-30A634B6E808}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoPaymentGateway.CQRS.Queries", "CoPaymentGateway.CQRS.Queries\CoPaymentGateway.CQRS.Queries.csproj", "{0768B91C-FC0A-401B-AA0D-96E6BFA52695}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoPaymentGateway.CQRS.Extensions", "CoPaymentGateway.CQRS.Extensions\CoPaymentGateway.CQRS.Extensions.csproj", "{D461FB6C-C960-4FE9-8AF1-137907F0486E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +23,22 @@ Global
 		{2519C521-BD80-4376-9A96-986B0479A33A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2519C521-BD80-4376-9A96-986B0479A33A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2519C521-BD80-4376-9A96-986B0479A33A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6D27E87-4909-43D2-B489-C08ABAA5A203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D27E87-4909-43D2-B489-C08ABAA5A203}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6D27E87-4909-43D2-B489-C08ABAA5A203}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D27E87-4909-43D2-B489-C08ABAA5A203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E6B1A4A-975D-409B-BD26-30A634B6E808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E6B1A4A-975D-409B-BD26-30A634B6E808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E6B1A4A-975D-409B-BD26-30A634B6E808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E6B1A4A-975D-409B-BD26-30A634B6E808}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0768B91C-FC0A-401B-AA0D-96E6BFA52695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0768B91C-FC0A-401B-AA0D-96E6BFA52695}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0768B91C-FC0A-401B-AA0D-96E6BFA52695}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0768B91C-FC0A-401B-AA0D-96E6BFA52695}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D461FB6C-C960-4FE9-8AF1-137907F0486E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D461FB6C-C960-4FE9-8AF1-137907F0486E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D461FB6C-C960-4FE9-8AF1-137907F0486E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D461FB6C-C960-4FE9-8AF1-137907F0486E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
