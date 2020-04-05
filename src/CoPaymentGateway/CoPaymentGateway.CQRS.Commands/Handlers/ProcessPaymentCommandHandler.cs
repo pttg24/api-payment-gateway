@@ -12,6 +12,9 @@ namespace CoPaymentGateway.CQRS.Commands.Handlers
 
     using CoPaymentGateway.Domain.BankAggregate;
     using CoPaymentGateway.Domain.PaymentAggregate;
+    using CoPaymentGateway.Domain.Validators;
+
+    using FluentValidation.Results;
 
     using MediatR;
 
@@ -20,33 +23,56 @@ namespace CoPaymentGateway.CQRS.Commands.Handlers
     /// </summary>
     internal class ProcessPaymentCommandHandler : IRequestHandler<ProcessPaymentCommand, Guid>
     {
+        /// <summary>
+        /// The bank repository
+        /// </summary>
         private readonly IBankRepository bankRepository;
+
+        /// <summary>
+        /// The payment repository
+        /// </summary>
         private readonly IPaymentRepository paymentRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProcessPaymentCommandHandler"/> class.
+        /// </summary>
+        /// <param name="paymentRepository">The payment repository.</param>
+        /// <param name="bankRepository">The bank repository.</param>
         public ProcessPaymentCommandHandler(IPaymentRepository paymentRepository, IBankRepository bankRepository)
         {
             this.paymentRepository = paymentRepository;
             this.bankRepository = bankRepository;
         }
 
+        /// <summary>
+        /// Handles a request
+        /// </summary>
+        /// <param name="request">The request</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>
+        /// Response from the request
+        /// </returns>
         public async Task<Guid> Handle(ProcessPaymentCommand request, CancellationToken cancellationToken)
         {
-            //RequestPaymentAggregateValidator validator = new RequestPaymentAggregateValidator();
-            //ValidationResult result = validator.Validate(request.RequestPayment);
+            if (request == null)
+            {
+                throw new InvalidProgramException("Request parameter is null");
+            }
 
-            //if (!result.IsValid)
-            //{
-            //    throw new ArgumentValidationException("One or more fields are wrong", result.Errors);
-            //}
-            //else
-            //{
+            PaymentRequestValidator requestChecker = new PaymentRequestValidator();
+            ValidationResult requestCheckerResults = requestChecker.Validate(request.PaymentRequest);
+
+            if (!requestCheckerResults.IsValid)
+            {
+                throw new InvalidProgramException("Request properties are wrong");
+            }
+
             var internalPaymentId = await this.paymentRepository.InsertPaymentAsync(request.PaymentRequest);
             var bankResponse = await this.bankRepository.ProcessPayment(request.PaymentRequest);
 
             await this.paymentRepository.UpdateInternalPaymentAsync(internalPaymentId, bankResponse);
 
             return internalPaymentId;
-            //}
         }
     }
 }

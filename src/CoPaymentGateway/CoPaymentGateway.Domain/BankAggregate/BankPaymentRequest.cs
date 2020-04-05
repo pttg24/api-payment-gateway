@@ -65,6 +65,7 @@ namespace CoPaymentGateway.Domain.BankAggregate
         /// The card number.
         /// </value>
         [Required]
+        [CreditCard]
         public string CardNumber { get; set; }
 
         /// <summary>

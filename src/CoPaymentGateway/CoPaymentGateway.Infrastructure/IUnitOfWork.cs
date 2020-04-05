@@ -13,8 +13,18 @@ namespace CoPaymentGateway.Infrastructure
     /// </summary>
     public interface IUnitOfWork
     {
+        /// <summary>
+        /// Gets the context.
+        /// </summary>
+        /// <value>
+        /// The context.
+        /// </value>
         PaymentGatewayContext Context { get; }
 
+        /// <summary>
+        /// Commits the asynchronous.
+        /// </summary>
+        /// <returns></returns>
         Task CommitAsync();
     }
 }

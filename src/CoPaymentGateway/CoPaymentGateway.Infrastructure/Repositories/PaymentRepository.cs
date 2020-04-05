@@ -76,7 +76,7 @@ namespace CoPaymentGateway.Infrastructure.Repositories
                     CardExpiryMonth = internalPaymentInfo.CardExpiryMonth,
                     CardExpiryYear = internalPaymentInfo.CardExpiryYear,
                     CardName = internalPaymentInfo.CardName,
-                    CardNumber = internalPaymentInfo.CardNumber,
+                    CardNumber = internalPaymentInfo.CardNumber.ToMaskedString(),
                     CurrencyCode = internalPaymentInfo.CurrencyCode,
                     Status = internalPaymentInfo.Status,
                     StatusDesc = ((StatusTypes)internalPaymentInfo.Status).GetName()
