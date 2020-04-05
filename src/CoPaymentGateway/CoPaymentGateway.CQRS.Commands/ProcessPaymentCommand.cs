@@ -4,14 +4,18 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using CoPaymentGateway.Domain;
-
 namespace CoPaymentGateway.CQRS.Commands
 {
+    using System;
+
+    using CoPaymentGateway.Domain;
+
+    using MediatR;
+
     /// <summary>
     /// <see cref="ProcessPaymentCommand"/>
     /// </summary>
-    public class ProcessPaymentCommand
+    public class ProcessPaymentCommand : IRequest<Guid>
     {
         /// <summary>
         /// The payment request

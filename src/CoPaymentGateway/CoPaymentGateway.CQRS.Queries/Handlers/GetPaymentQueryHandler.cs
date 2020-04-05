@@ -9,20 +9,26 @@ namespace CoPaymentGateway.CQRS.Queries.Handlers
     using System.Threading;
     using System.Threading.Tasks;
 
+    using CoPaymentGateway.Domain;
+    using CoPaymentGateway.Domain.PaymentAggregate;
+
     using MediatR;
 
     /// <summary>
     /// <see cref="GetPaymentQueryHandler"/>
     /// </summary>
-    internal class GetPaymentQueryHandler : IRequestHandler<GetPaymentQuery, string>
+    internal class GetPaymentQueryHandler : IRequestHandler<GetPaymentQuery, PaymentResponse>
     {
-        public GetPaymentQueryHandler()
+        private readonly IPaymentRepository paymentRepository;
+
+        public GetPaymentQueryHandler(IPaymentRepository paymentRepository)
         {
+            this.paymentRepository = paymentRepository;
         }
 
-        public async Task<string> Handle(GetPaymentQuery request, CancellationToken cancellationToken)
+        public async Task<PaymentResponse> Handle(GetPaymentQuery request, CancellationToken cancellationToken)
         {
-            return "Payment Gateway";
+            return await this.paymentRepository.GetPaymentAsync(request.PaymentId);
         }
     }
 }

@@ -8,12 +8,14 @@ namespace CoPaymentGateway.CQRS.Queries
 {
     using System;
 
+    using CoPaymentGateway.Domain;
+
     using MediatR;
 
     /// <summary>
     /// <see cref="GetPaymentQuery"/>
     /// </summary>
-    public class GetPaymentQuery : IRequest<string>
+    public class GetPaymentQuery : IRequest<PaymentResponse>
     {
         /// <summary>
         /// The payment identifier

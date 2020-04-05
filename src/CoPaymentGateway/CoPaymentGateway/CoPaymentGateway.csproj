@@ -15,5 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CoPaymentGateway.CQRS.Extensions\CoPaymentGateway.CQRS.Extensions.csproj" />
+    <ProjectReference Include="..\CoPaymentGateway.Infrastructure\CoPaymentGateway.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

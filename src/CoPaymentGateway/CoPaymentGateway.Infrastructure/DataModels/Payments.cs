@@ -1,18 +1,27 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="PaymentResponse.cs" company="CofcoIntl, Lda">
-//     Author: Pedro Tiago Gomes, 2020
+// <copyright file="Payments.cs" company="CofcoIntl, Lda">
+//     Copyright (c) CofcoIntl, Lda. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System;
-
-namespace CoPaymentGateway.Domain
+namespace CoPaymentGateway.Infrastructure.DataModels
 {
+    using System;
+
     /// <summary>
-    /// <see cref="PaymentResponse"/>
+    /// <see cref="Payments"/>
     /// </summary>
-    public class PaymentResponse
+    public partial class Payments
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Payments"/> class.
+        /// </summary>
+        public Payments()
+        {
+            this.DateCreated = DateTime.Now;
+            this.DateModified = DateTime.Now;
+        }
+
         /// <summary>
         /// Gets or sets the amount.
         /// </summary>
@@ -76,6 +85,38 @@ namespace CoPaymentGateway.Domain
         /// The currency code.
         /// </value>
         public string CurrencyCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date created.
+        /// </summary>
+        /// <value>
+        /// The date created.
+        /// </value>
+        public DateTime DateCreated { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date modified.
+        /// </summary>
+        /// <value>
+        /// The date modified.
+        /// </value>
+        public DateTime DateModified { get; set; }
+
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
+        public long Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the internal payment identifier.
+        /// </summary>
+        /// <value>
+        /// The internal payment identifier.
+        /// </value>
+        public Guid InternalPaymentId { get; set; }
 
         /// <summary>
         /// Gets or sets the status.

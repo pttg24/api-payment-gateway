@@ -37,15 +37,17 @@ namespace CoPaymentGateway.Controllers
         [Route("{paymentId}")]
         public async Task<IActionResult> GetPayment(Guid paymentId)
         {
-            return this.Ok(await this.mediator.Send(new GetPaymentQuery(paymentId)));
+            var response = await this.mediator.Send(new GetPaymentQuery(paymentId));
+
+            return this.Ok(response);
         }
 
         [HttpPost]
         public async Task<IActionResult> PostPayment(PaymentRequest requestPaymentAggregate)
         {
-            var paymentRequest = await this.mediator.Send(new ProcessPaymentCommand(requestPaymentAggregate));
+            var internalPaymentRequestId = await this.mediator.Send(new ProcessPaymentCommand(requestPaymentAggregate));
 
-            return this.Ok();
+            return this.Ok(internalPaymentRequestId);
             //return new ObjectResult(entity)
             //{
             //    StatusCode = Microsoft.AspNetCore.Http.StatusCodes.Status201Created

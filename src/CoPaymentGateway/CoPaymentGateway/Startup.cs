@@ -1,13 +1,17 @@
 using CoPaymentGateway.CQRS.Extensions.DependencyInjection;
+using CoPaymentGateway.Domain.BankAggregate;
+using CoPaymentGateway.Domain.PaymentAggregate;
+using CoPaymentGateway.Infrastructure;
+using CoPaymentGateway.Infrastructure.Repositories;
 
 using MediatR;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
 using Microsoft.OpenApi.Models;
 
 namespace CoPaymentGateway
@@ -54,11 +58,24 @@ namespace CoPaymentGateway
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //MediaTr
             //services.AddControllers();
             services.AddMediatR(typeof(Startup).Assembly);
 
+            //CQRS
             services.AddCQRSCommands();
             services.AddCQRSQueries();
+
+            //Repositories
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
+            services.AddScoped<IBankRepository, BankRepository>();
+
+            //Context
+            services.AddTransient(typeof(PaymentGatewayContext));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            //InMemoryDatabase
+            services.AddDbContext<PaymentGatewayContext>(options => options.UseInMemoryDatabase(databaseName: "DB_PaymentGateway"));
 
             services.AddMvc();
 

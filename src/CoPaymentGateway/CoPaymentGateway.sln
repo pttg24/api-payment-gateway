@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoPaymentGateway.CQRS.Queri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoPaymentGateway.CQRS.Extensions", "CoPaymentGateway.CQRS.Extensions\CoPaymentGateway.CQRS.Extensions.csproj", "{D461FB6C-C960-4FE9-8AF1-137907F0486E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoPaymentGateway.Infrastructure", "CoPaymentGateway.Infrastructure\CoPaymentGateway.Infrastructure.csproj", "{329DBA8D-B481-47D5-B7FF-C87397F45A6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D461FB6C-C960-4FE9-8AF1-137907F0486E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D461FB6C-C960-4FE9-8AF1-137907F0486E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D461FB6C-C960-4FE9-8AF1-137907F0486E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{329DBA8D-B481-47D5-B7FF-C87397F45A6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{329DBA8D-B481-47D5-B7FF-C87397F45A6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{329DBA8D-B481-47D5-B7FF-C87397F45A6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{329DBA8D-B481-47D5-B7FF-C87397F45A6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
