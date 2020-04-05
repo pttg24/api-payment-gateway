@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="PaymentRequest.cs" company="CofcoIntl, Lda">
+// <copyright>
 //     Author: Pedro Tiago Gomes, 2020
 // </copyright>
 //-----------------------------------------------------------------------

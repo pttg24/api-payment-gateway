@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="PaymentRepository.cs" company="CofcoIntl, Lda">
-//     Copyright (c) CofcoIntl, Lda. All rights reserved.
+// <copyright>
+//     Author: Pedro Tiago Gomes, 2020
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -12,6 +12,7 @@ namespace CoPaymentGateway.Infrastructure.Repositories
 
     using CoPaymentGateway.Domain;
     using CoPaymentGateway.Domain.BankAggregate;
+    using CoPaymentGateway.Domain.Exceptions;
     using CoPaymentGateway.Domain.PaymentAggregate;
     using CoPaymentGateway.Infrastructure.DataModels;
 
@@ -77,7 +78,7 @@ namespace CoPaymentGateway.Infrastructure.Repositories
             }
             else
             {
-                throw new Exception("Payment not found");
+                throw new InvalidPaymentException("Internal Payment Info not found.");
             }
         }
 
@@ -128,7 +129,7 @@ namespace CoPaymentGateway.Infrastructure.Repositories
             }
             else
             {
-                throw new Exception("Could not find internal payment code, contact the administration service");
+                throw new InvalidPaymentException("Internal Payment Info not found.");
             }
         }
 

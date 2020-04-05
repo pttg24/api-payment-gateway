@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="IBankRepository.cs" company="CofcoIntl, Lda">
-//     Copyright (c) CofcoIntl, Lda. All rights reserved.
+// <copyright>
+//     Author: Pedro Tiago Gomes, 2020
 // </copyright>
 //-----------------------------------------------------------------------
 
