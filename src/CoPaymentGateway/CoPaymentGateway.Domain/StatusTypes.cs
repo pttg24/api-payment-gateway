@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using CoPaymentGateway.Domain.Attributes;
+
 namespace CoPaymentGateway.Domain
 {
     /// <summary>
@@ -14,16 +16,19 @@ namespace CoPaymentGateway.Domain
         /// <summary>
         /// The created
         /// </summary>
+        [Name("Created")]
         Created = 0,
 
         /// <summary>
         /// The approved
         /// </summary>
+        [Name("Approved")]
         Approved = 1,
 
         /// <summary>
         /// The rejected
         /// </summary>
+        [Name("Rejected")]
         Rejected = 2,
     }
 }

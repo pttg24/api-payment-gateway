@@ -4,6 +4,7 @@ using CoPaymentGateway.Domain.PaymentAggregate;
 using CoPaymentGateway.Helpers;
 using CoPaymentGateway.Infrastructure;
 using CoPaymentGateway.Infrastructure.Repositories;
+using CoPaymentGateway.Infrastructure.Services;
 
 using MediatR;
 
@@ -79,6 +80,7 @@ namespace CoPaymentGateway
             //Repositories
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddScoped<IBankRepository, BankRepository>();
+            services.AddScoped<IFakeBankResponseService, FakeBankResponseService>();
 
             //Context
             services.AddTransient(typeof(PaymentGatewayContext));

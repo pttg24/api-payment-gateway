@@ -84,5 +84,13 @@ namespace CoPaymentGateway.Domain
         /// The status.
         /// </value>
         public int Status { get; set; }
+
+        /// <summary>
+        /// Gets or sets the status desc.
+        /// </summary>
+        /// <value>
+        /// The status desc.
+        /// </value>
+        public string StatusDesc { get; set; }
     }
 }

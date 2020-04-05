@@ -6,11 +6,11 @@
 
 namespace CoPaymentGateway.Infrastructure.Repositories
 {
-    using System;
     using System.Threading.Tasks;
 
     using CoPaymentGateway.Domain;
     using CoPaymentGateway.Domain.BankAggregate;
+    using CoPaymentGateway.Infrastructure.Services;
 
     /// <summary>
     /// <see cref="BankRepository"/>
@@ -18,10 +18,16 @@ namespace CoPaymentGateway.Infrastructure.Repositories
     public class BankRepository : IBankRepository
     {
         /// <summary>
+        /// The fake bank response service
+        /// </summary>
+        private readonly IFakeBankResponseService fakeBankResponseService;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="BankRepository"/> class.
         /// </summary>
-        public BankRepository()
+        public BankRepository(IFakeBankResponseService fakeBankResponseService)
         {
+            this.fakeBankResponseService = fakeBankResponseService;
         }
 
         /// <summary>
@@ -31,12 +37,9 @@ namespace CoPaymentGateway.Infrastructure.Repositories
         /// <returns></returns>
         public async Task<BankPaymentResponse> ProcessPayment(PaymentRequest paymentRequest)
         {
-            return await Task.FromResult(new BankPaymentResponse()
-            {
-                Status = 1,
-                BankId = 1,
-                PaymentId = Guid.NewGuid()
-            });
+            var response = await this.fakeBankResponseService.RandomResponseGenerator();
+
+            return await Task.FromResult(response);
         }
     }
 }

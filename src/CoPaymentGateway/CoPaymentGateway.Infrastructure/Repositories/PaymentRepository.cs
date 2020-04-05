@@ -13,6 +13,7 @@ namespace CoPaymentGateway.Infrastructure.Repositories
     using CoPaymentGateway.Domain;
     using CoPaymentGateway.Domain.BankAggregate;
     using CoPaymentGateway.Domain.Exceptions;
+    using CoPaymentGateway.Domain.Extensions;
     using CoPaymentGateway.Domain.PaymentAggregate;
     using CoPaymentGateway.Infrastructure.DataModels;
 
@@ -36,6 +37,10 @@ namespace CoPaymentGateway.Infrastructure.Repositories
         /// </summary>
         private bool disposed;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PaymentRepository"/> class.
+        /// </summary>
+        /// <param name="unitOfWork">The unit of work.</param>
         public PaymentRepository(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
@@ -73,7 +78,8 @@ namespace CoPaymentGateway.Infrastructure.Repositories
                     CardName = internalPaymentInfo.CardName,
                     CardNumber = internalPaymentInfo.CardNumber,
                     CurrencyCode = internalPaymentInfo.CurrencyCode,
-                    Status = internalPaymentInfo.Status
+                    Status = internalPaymentInfo.Status,
+                    StatusDesc = ((StatusTypes)internalPaymentInfo.Status).GetName()
                 };
             }
             else
