@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/src/CoPaymentGateway
+    working_directory: ~/api-payment-gateway/src/CoPaymentGateway/
     docker:
       - image: microsoft/aspnetcore-build:2.0
     steps:
