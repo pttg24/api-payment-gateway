@@ -1,13 +1,12 @@
- version: 2.1
-
- orbs:
-  win: circleci/windows@2.2.0
-
- jobs:
-   build:
-   working_directory: /CoPaymentGateway
-     executor: win/default     
-    
-     steps:
-       - checkout
-       - run: dotnet build
+version: 2
+jobs:
+  build:
+    working_directory: /CoPaymentGateway
+    docker:
+      - image: microsoft/aspnetcore-build:2.0
+    steps:
+      - checkout
+      - run: find .
+      - run: dotnet restore
+      - run: dotnet build
+      - run: dotnet test --no-build CoPaymentGateway.Tests
