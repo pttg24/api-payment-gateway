@@ -4,6 +4,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("CoPaymentGateway.Tests")]
+
 namespace CoPaymentGateway.CQRS.Queries.Handlers
 {
     using System.Threading;

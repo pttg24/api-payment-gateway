@@ -4,6 +4,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("CoPaymentGateway.Tests")]
+
 namespace CoPaymentGateway.CQRS.Commands.Handlers
 {
     using System;
@@ -11,6 +15,7 @@ namespace CoPaymentGateway.CQRS.Commands.Handlers
     using System.Threading.Tasks;
 
     using CoPaymentGateway.Domain.BankAggregate;
+    using CoPaymentGateway.Domain.Exceptions;
     using CoPaymentGateway.Domain.PaymentAggregate;
     using CoPaymentGateway.Domain.Validators;
 
@@ -56,7 +61,7 @@ namespace CoPaymentGateway.CQRS.Commands.Handlers
         {
             if (request == null)
             {
-                throw new InvalidProgramException("Request parameter is null");
+                throw new InvalidPaymentException("Request parameter is null");
             }
 
             PaymentRequestValidator requestChecker = new PaymentRequestValidator();
@@ -64,7 +69,7 @@ namespace CoPaymentGateway.CQRS.Commands.Handlers
 
             if (!requestCheckerResults.IsValid)
             {
-                throw new InvalidProgramException("Request properties are wrong");
+                throw new InvalidPaymentException("Request properties are wrong");
             }
 
             var internalPaymentId = await this.paymentRepository.InsertPaymentAsync(request.PaymentRequest);
