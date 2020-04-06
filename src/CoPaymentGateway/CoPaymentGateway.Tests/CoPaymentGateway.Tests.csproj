@@ -15,14 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="API\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CoPaymentGateway.CQRS.Commands\CoPaymentGateway.CQRS.Commands.csproj" />
     <ProjectReference Include="..\CoPaymentGateway.CQRS.Queries\CoPaymentGateway.CQRS.Queries.csproj" />
     <ProjectReference Include="..\CoPaymentGateway.Domain\CoPaymentGateway.Domain.csproj" />
     <ProjectReference Include="..\CoPaymentGateway.Infrastructure\CoPaymentGateway.Infrastructure.csproj" />
+    <ProjectReference Include="..\CoPaymentGateway\CoPaymentGateway.csproj" />
   </ItemGroup>
 
 </Project>

@@ -55,7 +55,15 @@ namespace CoPaymentGateway.Controllers
             this.logger.LogDebug($"Starting GetPayment --> {paymentId}");
 
             var response = await this.mediator.Send(new GetPaymentQuery(paymentId));
-            return this.Ok(response);
+
+            if (response != null)
+            {
+                return this.Ok(response);
+            }
+            else
+            {
+                return this.NotFound(response);
+            }
         }
 
         /// <summary>
