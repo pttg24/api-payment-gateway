@@ -4,8 +4,8 @@ networks:
   default-network:
 
 services:
-  payment-gateway-api:
-    image: payment-gateway-api
+  copaymentgateway:
+    image: copaymentgateway
     ports:
       - 5000:80
     networks:
