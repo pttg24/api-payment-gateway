@@ -77,9 +77,7 @@ namespace CoPaymentGateway
                 endpoints.MapControllers();
             });
 
-            app.UseHttpMetrics();
             app.UseMetricServer();
-            app.UseMiddleware<ResponseTimeHelper>();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
