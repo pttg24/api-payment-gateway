@@ -40,7 +40,7 @@ Run
 `docker build -t copaymentgateway -f Dockerfile .`  
 `docker-compose up`  
   
-Technical decisions, further developments, conclusions, please go to --> [GitHub](/docs/technical-notes.md)  
+Technical decisions, further developments, conclusions, please go to --> [TechNotes](/docs/technical-notes.md)  
   
 ## Bonus Points  
 - [x] Application logging  
