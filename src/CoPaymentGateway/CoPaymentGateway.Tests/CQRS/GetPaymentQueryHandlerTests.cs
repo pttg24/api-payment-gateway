@@ -17,6 +17,7 @@ namespace CoPaymentGateway.Tests.CQRS
     using CoPaymentGateway.Domain.PaymentAggregate;
 
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Logging.Abstractions;
 
     using Moq;
 
@@ -44,8 +45,7 @@ namespace CoPaymentGateway.Tests.CQRS
         public async Task GetApprovedPayment()
         {
             //Arrange
-            var mock = new Mock<ILogger<GetPaymentQueryHandler>>();
-            ILogger<GetPaymentQueryHandler> logger = mock.Object;
+            ILogger<GetPaymentQueryHandler> logger = new Logger<GetPaymentQueryHandler>(new NullLoggerFactory());
 
             var internalPaymentId = Guid.NewGuid();
             var approvedStatus = 1;
@@ -84,8 +84,7 @@ namespace CoPaymentGateway.Tests.CQRS
         public async Task GetRejectedPayment()
         {
             //Arrange
-            var mock = new Mock<ILogger<GetPaymentQueryHandler>>();
-            ILogger<GetPaymentQueryHandler> logger = mock.Object;
+            ILogger<GetPaymentQueryHandler> logger = new Logger<GetPaymentQueryHandler>(new NullLoggerFactory());
 
             var internalPaymentId = Guid.NewGuid();
             var rejectedStatus = 2;

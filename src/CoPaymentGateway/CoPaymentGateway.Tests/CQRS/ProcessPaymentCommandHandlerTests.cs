@@ -18,6 +18,7 @@ namespace CoPaymentGateway.Tests.CQRS
     using CoPaymentGateway.Domain.PaymentAggregate;
 
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Logging.Abstractions;
 
     using Moq;
 
@@ -44,8 +45,7 @@ namespace CoPaymentGateway.Tests.CQRS
         public async Task ProcessInvalidRequest()
         {
             //Arrange
-            var mock = new Mock<ILogger<ProcessPaymentCommandHandler>>();
-            ILogger<ProcessPaymentCommandHandler> logger = mock.Object;
+            ILogger<ProcessPaymentCommandHandler> logger = new Logger<ProcessPaymentCommandHandler>(new NullLoggerFactory());
 
             var fakePaymentRequest = new PaymentRequest()
             {
@@ -94,8 +94,7 @@ namespace CoPaymentGateway.Tests.CQRS
         public async Task ProcessValidRequest()
         {
             //Arrange
-            var mock = new Mock<ILogger<ProcessPaymentCommandHandler>>();
-            ILogger<ProcessPaymentCommandHandler> logger = mock.Object;
+            ILogger<ProcessPaymentCommandHandler> logger = new Logger<ProcessPaymentCommandHandler>(new NullLoggerFactory());
 
             var fakePaymentRequest = new PaymentRequest()
             {
