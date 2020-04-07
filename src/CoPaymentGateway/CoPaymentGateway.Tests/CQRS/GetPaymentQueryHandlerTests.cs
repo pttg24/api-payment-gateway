@@ -16,6 +16,8 @@ namespace CoPaymentGateway.Tests.CQRS
     using CoPaymentGateway.Domain.Extensions;
     using CoPaymentGateway.Domain.PaymentAggregate;
 
+    using Microsoft.Extensions.Logging;
+
     using Moq;
 
     using Xunit;
@@ -42,6 +44,9 @@ namespace CoPaymentGateway.Tests.CQRS
         public async Task GetApprovedPayment()
         {
             //Arrange
+            var mock = new Mock<ILogger<GetPaymentQueryHandler>>();
+            ILogger<GetPaymentQueryHandler> logger = mock.Object;
+
             var internalPaymentId = Guid.NewGuid();
             var approvedStatus = 1;
             var fakePaymentResponse = new PaymentResponse()
@@ -62,7 +67,7 @@ namespace CoPaymentGateway.Tests.CQRS
             this.paymentRepository.Setup(x => x.GetPaymentAsync(internalPaymentId)).Returns(Task.FromResult(fakePaymentResponse));
 
             var query = new GetPaymentQuery(internalPaymentId);
-            var handler = new GetPaymentQueryHandler(this.paymentRepository.Object);
+            var handler = new GetPaymentQueryHandler(this.paymentRepository.Object, logger);
             var result = await handler.Handle(query, CancellationToken.None);
 
             //Assert
@@ -79,6 +84,9 @@ namespace CoPaymentGateway.Tests.CQRS
         public async Task GetRejectedPayment()
         {
             //Arrange
+            var mock = new Mock<ILogger<GetPaymentQueryHandler>>();
+            ILogger<GetPaymentQueryHandler> logger = mock.Object;
+
             var internalPaymentId = Guid.NewGuid();
             var rejectedStatus = 2;
             var fakePaymentResponse = new PaymentResponse()
@@ -99,7 +107,7 @@ namespace CoPaymentGateway.Tests.CQRS
             this.paymentRepository.Setup(x => x.GetPaymentAsync(internalPaymentId)).Returns(Task.FromResult(fakePaymentResponse));
 
             var query = new GetPaymentQuery(internalPaymentId);
-            var handler = new GetPaymentQueryHandler(this.paymentRepository.Object);
+            var handler = new GetPaymentQueryHandler(this.paymentRepository.Object, logger);
             var result = await handler.Handle(query, CancellationToken.None);
 
             //Assert

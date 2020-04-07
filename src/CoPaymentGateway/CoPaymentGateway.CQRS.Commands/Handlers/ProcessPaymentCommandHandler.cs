@@ -23,6 +23,8 @@ namespace CoPaymentGateway.CQRS.Commands.Handlers
 
     using MediatR;
 
+    using Microsoft.Extensions.Logging;
+
     /// <summary>
     /// <see cref="ProcessPaymentCommandHandler"/>
     /// </summary>
@@ -34,6 +36,11 @@ namespace CoPaymentGateway.CQRS.Commands.Handlers
         private readonly IBankRepository bankRepository;
 
         /// <summary>
+        /// The logger
+        /// </summary>
+        private readonly ILogger<ProcessPaymentCommandHandler> logger;
+
+        /// <summary>
         /// The payment repository
         /// </summary>
         private readonly IPaymentRepository paymentRepository;
@@ -43,10 +50,11 @@ namespace CoPaymentGateway.CQRS.Commands.Handlers
         /// </summary>
         /// <param name="paymentRepository">The payment repository.</param>
         /// <param name="bankRepository">The bank repository.</param>
-        public ProcessPaymentCommandHandler(IPaymentRepository paymentRepository, IBankRepository bankRepository)
+        public ProcessPaymentCommandHandler(IPaymentRepository paymentRepository, IBankRepository bankRepository, ILogger<ProcessPaymentCommandHandler> logger)
         {
             this.paymentRepository = paymentRepository;
             this.bankRepository = bankRepository;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -61,6 +69,8 @@ namespace CoPaymentGateway.CQRS.Commands.Handlers
         {
             if (request == null)
             {
+                this.logger.LogError($"Starting ProcessPaymentCommand Handler --> request is null --> throwing exception");
+
                 throw new InvalidPaymentException("Request parameter is null");
             }
 
@@ -69,11 +79,16 @@ namespace CoPaymentGateway.CQRS.Commands.Handlers
 
             if (!requestCheckerResults.IsValid)
             {
+                this.logger.LogError($"Starting ProcessPaymentCommand Handler --> request properties are wrong --> throwing exception");
+
                 throw new InvalidPaymentException("Request properties are wrong");
             }
 
             var internalPaymentId = await this.paymentRepository.InsertPaymentAsync(request.PaymentRequest);
             var bankResponse = await this.bankRepository.ProcessPayment(request.PaymentRequest);
+
+            this.logger.LogDebug($"Updating Row InternalPaymentId --> {internalPaymentId}");
+            this.logger.LogDebug($"Updating Row BankPaymentId --> {bankResponse.PaymentId}");
 
             await this.paymentRepository.UpdateInternalPaymentAsync(internalPaymentId, bankResponse);
 

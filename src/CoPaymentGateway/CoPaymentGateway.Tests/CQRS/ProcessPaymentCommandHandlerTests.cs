@@ -17,6 +17,8 @@ namespace CoPaymentGateway.Tests.CQRS
     using CoPaymentGateway.Domain.Exceptions;
     using CoPaymentGateway.Domain.PaymentAggregate;
 
+    using Microsoft.Extensions.Logging;
+
     using Moq;
 
     using Xunit;
@@ -42,6 +44,9 @@ namespace CoPaymentGateway.Tests.CQRS
         public async Task ProcessInvalidRequest()
         {
             //Arrange
+            var mock = new Mock<ILogger<ProcessPaymentCommandHandler>>();
+            ILogger<ProcessPaymentCommandHandler> logger = mock.Object;
+
             var fakePaymentRequest = new PaymentRequest()
             {
                 Amount = Convert.ToDecimal(17.5),
@@ -70,7 +75,7 @@ namespace CoPaymentGateway.Tests.CQRS
             this.paymentRepository.Setup(x => x.UpdateInternalPaymentAsync(internalPaymentId, fakeBankResponse));
 
             var command = new ProcessPaymentCommand(fakePaymentRequest);
-            var handler = new ProcessPaymentCommandHandler(this.paymentRepository.Object, this.bankRepository.Object);
+            var handler = new ProcessPaymentCommandHandler(this.paymentRepository.Object, this.bankRepository.Object, logger);
 
             Task act() => handler.Handle(command, CancellationToken.None);
 
@@ -89,6 +94,9 @@ namespace CoPaymentGateway.Tests.CQRS
         public async Task ProcessValidRequest()
         {
             //Arrange
+            var mock = new Mock<ILogger<ProcessPaymentCommandHandler>>();
+            ILogger<ProcessPaymentCommandHandler> logger = mock.Object;
+
             var fakePaymentRequest = new PaymentRequest()
             {
                 Amount = Convert.ToDecimal(17.5),
@@ -117,7 +125,7 @@ namespace CoPaymentGateway.Tests.CQRS
             this.paymentRepository.Setup(x => x.UpdateInternalPaymentAsync(internalPaymentId, fakeBankResponse));
 
             var command = new ProcessPaymentCommand(fakePaymentRequest);
-            var handler = new ProcessPaymentCommandHandler(this.paymentRepository.Object, this.bankRepository.Object);
+            var handler = new ProcessPaymentCommandHandler(this.paymentRepository.Object, this.bankRepository.Object, logger);
 
             var result = await handler.Handle(command, CancellationToken.None);
 
