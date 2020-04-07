@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/src/CoPaymentGateway
     docker:
-      - image: microsoft/aspnetcore-build:2.0
+      - image: mcr.microsoft.com/dotnet/core/sdk:3.0
     steps:
       - checkout
       - run: find .
