@@ -23,8 +23,15 @@
 #ENTRYPOINT ["dotnet", "CoPaymentGateway.dll"]
 
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-nanoserver-1809 AS build-env
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS base
+WORKDIR /app
+EXPOSE 80
 
-COPY bin/Release/netcoreapp3.0/publish app/
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS publish
+COPY . ./
+RUN dotnet publish CoPaymentGateway -c Release -o /app/publish
 
-ENTRYPOINT ["dotnet", "app/CoPaymentGateway.dll"]
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "CoPaymentGateway.dll"]
