@@ -8,5 +8,5 @@ jobs:
       - checkout
       - run: find .
 
-      - run: dotnet build
+      - run: dotnet build ~/src/CoPaymentGateway/CoPaymentGateway
       - run: dotnet test --no-build ~/src/CoPaymentGateway/CoPaymentGateway.Tests
