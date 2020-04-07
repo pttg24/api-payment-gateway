@@ -10,7 +10,7 @@ According to the previous image, the workflow of an online purchase involves 4 a
 This API is focused on operations between the merchant, payment gateway and bank.  
 1. Merchant sends a payment request to the payment gateway and receives an acknowledge message with an InternalId.  
 2. Payment Gateway sends a Request to Bank and receives a Bank response that will be assigned with the InternalId previously generated.
-3. When Merchant asks for details of payment (with an internalID) Payment Gateway will answer with full details of the transaction.
+3. When Merchant asks for details of payment (with an internalID) Payment Gateway will answer with full details of the transaction.  
 ![GitHub Logo](/docs/Messages.png)  
 
 ## Requirements/Deliverables  
