@@ -34,6 +34,16 @@ This API is focused on operations between merchant, payment gateway and bank.
 * CircleCI, Git, Visual Studio 2019 
   
 ### How to Run  
+Checkout complete folder
+Go to src\CoPaymentGateway folder  
+Run  
+`docker build -t copaymentgateway -f Dockerfile .`  
+`docker-compose up`  
+  
+Technical decisions, further developments, conclusions, please go to -->   
   
 ## Bonus Points  
-
+- [x] Application logging  
+- [x] Application metrics
+- [x] Containerization  
+- [x] Build script / CI
