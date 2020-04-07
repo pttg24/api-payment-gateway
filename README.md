@@ -20,6 +20,18 @@ This API is focused on operations between merchant, payment gateway and bank.
 - [x] Tech: build a simulator to mock bank responses  
 
 ## Technical Summary  
+**Activities**
+- [x] Business and requirements analysis  
+- [x] Design and development of technical solution
+- [x] Setup tech infrastructure  
+- [x] Automated and acceptance tests  
+  
+**Stack**  
+* .Net Core 3.0, .Net Standard, Entity Framework Core
+* CQRS, Mediator
+* xUnit, OpenAPI/Swagger, FluentValidator
+* Docker, Serilog, Grafana, Prometheus
+* CircleCI, Git, Visual Studio 2019 
   
 ### How to Run  
   
