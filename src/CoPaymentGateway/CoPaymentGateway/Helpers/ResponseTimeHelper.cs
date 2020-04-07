@@ -18,7 +18,9 @@ namespace CoPaymentGateway.Helpers
 
         public async Task InvokeAsync(HttpContext context)
         {
-            HistogramConfiguration config = null;
+            HistogramConfiguration config = new HistogramConfiguration();
+            config.LabelNames = new string[] { context.Request.Method, context.Request.Path };
+
             var sw = Stopwatch.StartNew();
             await _next(context);
             sw.Stop();
