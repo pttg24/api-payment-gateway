@@ -16,6 +16,8 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
+using Prometheus;
+
 namespace CoPaymentGateway.Controllers
 {
     [ApiController]
@@ -31,6 +33,16 @@ namespace CoPaymentGateway.Controllers
         /// The mediator
         /// </summary>
         private readonly IMediator mediator;
+
+        /// <summary>
+        /// The counter
+        /// </summary>
+        private Counter getcounter = Metrics.CreateCounter("copaymentgatewaygetcontroller", "Metrics getcounter");
+
+        /// <summary>
+        /// The postcounter
+        /// </summary>
+        private Counter postcounter = Metrics.CreateCounter("copaymentgatewaypostcontroller", "Metrics postcounter");
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentsController"/> class.
@@ -52,6 +64,8 @@ namespace CoPaymentGateway.Controllers
         [Route("{paymentId}")]
         public async Task<IActionResult> GetPayment(Guid paymentId)
         {
+            this.getcounter.Inc();
+
             this.logger.LogDebug($"Starting GetPayment --> {paymentId}");
 
             var response = await this.mediator.Send(new GetPaymentQuery(paymentId));
@@ -74,6 +88,8 @@ namespace CoPaymentGateway.Controllers
         [HttpPost]
         public async Task<IActionResult> PostPayment(PaymentRequest requestPaymentAggregate)
         {
+            this.postcounter.Inc();
+
             this.logger.LogInformation($"Starting PostPayment --> Card : {requestPaymentAggregate.CardNumber} Amount {requestPaymentAggregate.Amount} ");
 
             var internalPaymentRequestId = await this.mediator.Send(new ProcessPaymentCommand(requestPaymentAggregate));
