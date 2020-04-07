@@ -1,7 +1,7 @@
 ## Architecture  
 
 **CoPaymentGateway(API)**    
-API project. PaymentsController expose two methods: get payment and post payment.  
+API project. PaymentsController exposes two methods: get payment and post payment.  
 GetPayment - receive an internalPaymentId (Guid) and returns payment full details (PaymentResponse) or Not Found error    
 PostPayment - receive a PaymentRequest and returns an internalPaymentId (Guid)  
 Services injection (mediator, cqrs, repositories) and InMemory database defined on Startup.cs  
@@ -12,7 +12,7 @@ Prometheus: metrics server
   
 **CoPaymentGateway.CQRS.Commands**    
 CQRS Pattern - Commands (Post action).  
-Receive and validate a PaymentRequest (validation agains rules defined on PaymentRequestValidator)  
+Receive and validate a PaymentRequest (validation against rules defined on PaymentRequestValidator)  
 If valid, inserts payment on Memory Database (table Payments) and generate an internalPaymentId (Guid)  
 Send the request to Bank (simulator)  
 Update row on database with Bank response. A pair of Guid (internalPaymentId-BankResponse.PaymentId) is now saved on database.  
