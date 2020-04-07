@@ -70,6 +70,16 @@ namespace CoPaymentGateway
             app.UseHttpMetrics();
             app.UseMetricServer();
             app.UseMiddleware<ResponseTimeHelper>();
+
+            var counter = Metrics.CreateCounter("PathCounter", "Counts requests to endpoints", new CounterConfiguration
+            {
+                LabelNames = new[] { "method", "endpoint" }
+            });
+            app.Use((context, next) =>
+            {
+                counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
+                return next();
+            });
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
