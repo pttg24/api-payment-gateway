@@ -40,6 +40,10 @@ Run
 `docker build -t copaymentgateway -f Dockerfile .`  
 `docker-compose up`  
   
+API - http://localhost:5000/  
+Prometheus - http://localhost:9090  
+Grafana - http://localhost:3000/  
+
 Technical decisions, further developments, conclusions, please go to --> [TechNotes](/docs/technical-notes.md)  
   
 ## Bonus Points  
